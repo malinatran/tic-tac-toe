@@ -104,6 +104,17 @@
       return true;
     },
 
+    isFilled: function() {
+      for (var i = 0; i < this.getSize(); i++) {
+        for (var j = 0; j < this.getSize(); j++) {
+          if (this.isSquareEmpty(i, j)) {
+            return false;
+          };
+        }
+      }
+      return true;
+    },
+
     clearSquare: function(x, y) {
       this.grid[x][y] = null;
       return this;

@@ -12,38 +12,31 @@
     },
 
     requestMove: function(makeMoveCallback, board, opponentIdentity) {
-      var centerMove = this.getCenterMove(board);
-      if (board.isSquareEmpty(centerMove.x, centerMove.y)) {
-        makeMoveCallback(centerMove.x, centerMove.y);
-        return this;
+      var variousMoves = [
+        this.getCenterMove(board),
+        this.getWinningMove(board, this.getIdentity()),
+        this.getWinningMove(board, opponentIdentity),
+        this.getCornerMove(board),
+        this.getRandomMove(board.getEmptySquares())
+      ];
+      for (var i = 0; i < variousMoves.length; i++) {
+        var move = variousMoves[i];
+        if (move !== null) {
+          setTimeout(function() {
+            makeMoveCallback(move.x, move.y);
+          }, 500);
+          return this;
+        }
       }
-
-      var winningMove = this.getWinningMove(board, this.getIdentity());
-      if (winningMove !== null) {
-        makeMoveCallback(winningMove.x, winningMove.y);
-        return this;
-      }
-
-      var blockingMove = this.getWinningMove(board, opponentIdentity);
-      if (blockingMove !== null) {
-        makeMoveCallback(blockingMove.x, blockingMove.y);
-        return this;
-      }
-
-      var cornerMove = this.getCornerMove(board);
-      if (cornerMove !== null) {
-        makeMoveCallback(cornerMove.x, cornerMove.y);
-        return this;
-      }
-
-      var randomMove = this.getRandomMove(board.getEmptySquares());
-      makeMoveCallback(randomMove.x, randomMove.y);
-      return this;
     },
 
     getCenterMove: function(board) {
       var middle = Math.floor(board.getSize() / 2);
-      return { x: middle, y: middle };
+      var move = { x: middle, y: middle };
+      if (board.isSquareEmpty(move.x, move.y)) {
+        return move;
+      }
+      return null;
     },
 
     getWinningMove: function(board, identity) {
