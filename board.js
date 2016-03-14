@@ -1,7 +1,9 @@
+var TicTacToe = TicTacToe || {};
+
 (function(exports) {
   'use strict';
 
-  function Board(size) {
+  var Board = function(size) {
     this.size = size || 3;
     this.grid = [];
     for (var i = 0; i < this.size; i++) {
@@ -121,4 +123,4 @@
     }
   }
 
-})(this);
+})(TicTacToe);

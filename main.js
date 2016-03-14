@@ -1,4 +1,5 @@
 $(function() {
+  var TicTacToe = window.TicTacToe || {};
   var $squares = $('.square');
   var $messageBoard = $('#message-board');
 
@@ -17,11 +18,11 @@ $(function() {
   };
 
   var startGame = function() {
-    var player1 = new ComputerPlayer('X');
-    var player2 = new HumanPlayer('O');
+    var player1 = new TicTacToe.ComputerPlayer('X');
+    var player2 = new TicTacToe.HumanPlayer('O');
 
-    var board = new Board(3);
-    var game = new Game(player1, player2, board);
+    var board = new TicTacToe.Board(3);
+    var game = new TicTacToe.Game(player1, player2, board);
 
     game.setMoveMadeCallback(moveMadeCallback);
     game.setGameWonCallback(gameWonCallback);
@@ -37,7 +38,6 @@ $(function() {
     $messageBoard.text('');
     game.startGame();
   };
-
 
   $('#start-button').add('#reset-button').on('click', function() {
     $('#reset-button').show();

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>tic tac toe</title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="vendor/mocha.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head> 
+  <body>
+    <div id="title"><span class="first-word">TIC</span><span class="second-word">TAC</span><span class="third-word">TOE</span></div>
+    <div id="attribution">Made by Malina &hearts;</div>
+
+    <!-- Game View -->
+    <table id="computer-game">
+      <tr>
+        <td data-grid-id="0-0" class="square"></td>
+        <td data-grid-id="0-1" class="square"></td>
+        <td data-grid-id="0-2" class="square"></td>
+        <td data-grid-id="0-3" class="square"></td>
+        <td data-grid-id="0-4" class="square"></td>
+      </tr>
+      <tr>
+        <td data-grid-id="1-0" class="square"></td>
+        <td data-grid-id="1-1" class="square"></td>
+        <td data-grid-id="1-2" class="square"></td>
+        <td data-grid-id="1-3" class="square"></td>
+        <td data-grid-id="1-4" class="square"></td>
+      </tr>
+      <tr>
+        <td data-grid-id="2-0" class="square"></td>
+        <td data-grid-id="2-1" class="square"></td>
+        <td data-grid-id="2-2" class="square"></td>
+        <td data-grid-id="2-3" class="square"></td>
+        <td data-grid-id="2-4" class="square"></td>
+      </tr>
+      <tr>
+        <td data-grid-id="3-0" class="square"></td>
+        <td data-grid-id="3-1" class="square"></td>
+        <td data-grid-id="3-2" class="square"></td>
+        <td data-grid-id="3-3" class="square"></td>
+        <td data-grid-id="3-4" class="square"></td>
+      </tr>
+      <tr>
+        <td data-grid-id="4-0" class="square"></td>
+        <td data-grid-id="4-1" class="square"></td>
+        <td data-grid-id="4-2" class="square"></td>
+        <td data-grid-id="4-3" class="square"></td>
+        <td data-grid-id="4-4" class="square"></td>
+      </tr>
+    </table>
+    <div id="start-button">START</div>
+    <div id="reset-button">RESET</div>
+    <div id="message-board"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <script src="board.js"></script>
+    <script src="human_player.js"></script>
+    <script src="computer_player.js"></script>
+    <script src="game.js"></script>
+
+    <script>
+      var TicTacToe = window.TicTacToe || {};
+      var $squares = $('.square');
+      var $messageBoard = $('#message-board');
+
+      var moveMadeCallback = function(x, y, identity) {
+        $('.square[data-grid-id="' + x + '-' + y +'"]').text(identity);
+      };
+
+      var gameWonCallback = function(winner) {
+        $messageBoard.text('Game over! ' + winner.getIdentity() + ' wins.');
+      };
+
+      var gameTiedCallback = function() {
+        $messageBoard.text('Game tied!');
+      };
+
+      var startGame = function() {
+        var player1 = new TicTacToe.ComputerPlayer('X');
+        var player2 = new TicTacToe.ComputerPlayer('O');
+
+        var board = new TicTacToe.Board(5);
+        var game = new TicTacToe.Game(player1, player2, board);
+
+        game.setMoveMadeCallback(moveMadeCallback);
+        game.setGameWonCallback(gameWonCallback);
+        game.setGameTiedCallback(gameTiedCallback);
+        $squares.text('');
+        $messageBoard.text('');
+        game.startGame();
+      };
+
+      $('#start-button').add('#reset-button').on('click', function() {
+        $('#reset-button').show();
+        $('#start-button').hide();
+        startGame();
+      });
+    </script>
+  </body>
+</html>

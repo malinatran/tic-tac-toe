@@ -1,10 +1,12 @@
+var TicTacToe = TicTacToe || {};
+
 (function(exports) {
   'use strict';
 
-  function Game(player1, player2, board) {
-   this.board = board;
-   this.player1 = player1;
-   this.player2 = player2;
+  var Game = function(player1, player2, board) {
+    this.board = board;
+    this.player1 = player1;
+    this.player2 = player2;
   }
   exports.Game = Game;
 
@@ -55,4 +57,4 @@
     }
   }
 
-})(this);
+})(TicTacToe);

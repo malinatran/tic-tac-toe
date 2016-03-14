@@ -1,7 +1,9 @@
+var TicTacToe = TicTacToe || {};
+
 (function(exports) {
   'use strict';
 
-  function ComputerPlayer(identity) {
+  var ComputerPlayer = function(identity) {
     this.identity = identity;
   }
   exports.ComputerPlayer = ComputerPlayer;
@@ -77,4 +79,4 @@
       return emptySquares[randNum];
     }
   }
-})(this);
+})(TicTacToe);

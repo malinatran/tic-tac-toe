@@ -88,3 +88,12 @@ table {
   margin-top: 20px;
   text-align: center;
 }
+
+#computer-game {
+  border: 5px solid #3B8686;
+  border-collapse: collapse;
+}
+
+#computer-game td {
+  border: 5px solid #3B8686;
+}
