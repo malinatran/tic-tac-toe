@@ -30,7 +30,7 @@ describe('Game', function() {
   });
 
   describe('#setMoveMadeCallback', function() {
-    it('should set the callback to be fired after move is maved', function() {
+    it('should set the callback to be fired after move is made', function() {
       var game = new Game(
         new ComputerPlayer('X'),
         new HumanPlayer('O'),

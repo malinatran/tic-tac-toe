@@ -116,7 +116,6 @@ var TicTacToe = TicTacToe || {};
           }
         }
       }
-      
       return true;
     },
 
