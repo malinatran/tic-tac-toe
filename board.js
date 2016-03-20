@@ -22,24 +22,26 @@ var TicTacToe = TicTacToe || {};
       return board;
     },
 
-    getEmptySquares: function() {
-      var emptySquares = [];
+    traverseBoard: function(callback) {
       for (var i = 0; i < this.getSize(); i++) {
         for (var j = 0; j < this.getSize(); j++) {
-          if (this.isSquareEmpty(i, j)) {
-            emptySquares.push({ x: i, y: j });
-          }
+          callback(i, j);
         }
       }
+    },
+
+    getEmptySquares: function() {
+      var emptySquares = [];
+      this.traverseBoard(function(x, y) {
+        if (this.isSquareEmpty(x, y)) {
+          emptySquares.push({ x: x, y: y });
+        }
+      }.bind(this)); 
       return emptySquares;
     },
 
     clearBoard: function() {
-      for (var i = 0; i < this.getSize(); i++) {
-        for (var j = 0; j < this.getSize(); j++) {
-          this.grid[i][j] = null;
-        }
-      } 
+      this.traverseBoard(this.clearSquare.bind(this));
       return this;
     },
 
@@ -111,9 +113,10 @@ var TicTacToe = TicTacToe || {};
         for (var j = 0; j < this.getSize(); j++) {
           if (this.isSquareEmpty(i, j)) {
             return false;
-          };
+          }
         }
       }
+      
       return true;
     },
 
