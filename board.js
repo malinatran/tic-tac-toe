@@ -109,7 +109,7 @@ var TicTacToe = TicTacToe || {};
     },
 
     isFilled: function() {
-      return this.getEmptySquares().length == 0;
+      return this.getEmptySquares().length === 0;
     },
 
     clearSquare: function(x, y) {
